@@ -1,19 +1,18 @@
-const { Schema, model } = require("mongoose");
+const Sequelize, { Model } = require("sequelize");
 
-const baladaSchema = new Schema({
-  id: Schema.Types.ObjectId,
-  name: {
-    type: String,
-    required: true
-  },
-  endereco: {
-    type: String,
-    required: true
-  },
-  particular: {
-    type: Boolean,
-    default: false
+class Balada extends Model {
+  static init(sequelize) {
+    super.init({
+        nome: Sequelize.STRING,
+        endereco: Sequelize.STRING,
+        private: Sequelize.BOOLEAN,
+        organizador: Sequelize.STRING,
+      },
+      {
+        sequelize,
+      }
+    );
   }
-});
+}
 
-module.exports = model("Balada", baladaSchema);
+export default Balada;

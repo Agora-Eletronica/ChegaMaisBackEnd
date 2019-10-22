@@ -1,25 +1,20 @@
-const { Schema, model } = require("mongoose");
+const Sequelize, { Model } = require('sequelize');
 
-const UserSchema = new Schema({
-  id: Schema.Types.ObjectId,
-  nome: {
-    type: String,
-    required: true
-  },
-  address: {
-    type: String,
-    required: true
-  },
-  idade: {
-    type: Number,
-    required: true
-  },
-  cpf: {
-    type: String,
-    maxlength: 11,
-    minlength: 9,
-    required: true
+class Usuario extends Model {
+  static init(sequelize) {
+    super.init({
+        nome: Sequelize.STRING,
+        endereco: Sequelize.STRING,
+        idade: Sequelize.NUMBER,
+        cpf: Sequelize.NUMBER,
+        email: Sequelize.STRING,
+        password_hash: Sequelize.STRING,
+      },
+      {
+        sequelize,
+      }
+    );
   }
-});
+}
 
-module.exports = model("Users", UserSchema);
+export default Usuario;
